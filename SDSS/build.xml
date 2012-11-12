@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<!-- ==================================================================== -->
+<!--                                                                      -->
+<!-- CONFIDENTIAL - Copyright (c) 2005-2006, Webaroo Inc.                 -->
+<!-- All Rights Reserved as an unpublished work.                          -->
+<!--                                                                      -->
+<!-- ==================================================================== -->
+
+
+<project name="SDSS Project" default="all" basedir=".">
+	<property name="src.dir" value="." />
+	<property name="lib.dir" value="./lib" />
+
+	<property name="build.dir" value="build" />
+	<property name="build.classes" value="${build.dir}/classes" />
+	<property name="build.lib" value="${build.dir}/lib" />
+	<property name="build.jsp" value="jsp" />
+
+	<property name="build.properties" value="properties" />
+
+	<property name="sdss.war.name" value="SDSS" />
+
+
+	<property name="debug.flag" value="on" />
+
+	<filelist id="dependent-jars" dir="${lib.dir}">
+		<file name="log4j/log4j-1.2.17.jar" />
+		<file name="c3p0/c3p0-0.9.1.2.jar" />
+		<file name="mysql-connector-java/mysql-connector-java-5.1.22-bin.jar" />
+		<file name="servlet/javax.servlet.jar" />
+		<file name="json/json.jar" />
+	</filelist>
+
+
+	<target name="prepare">
+		<mkdir dir="${build.dir}" />
+		<mkdir dir="${build.classes}" />
+		<mkdir dir="${build.lib}" />
+	</target>
+
+	<target name="clean" description="Removes all generated files">
+		<delete file="${build.lib}/sdss.jar" />
+		<delete file="${sdss.war.name}.war" />
+		<delete dir="${build.dir}" />
+	</target>
+
+	<target name="compile" depends="prepare" description="compiles the whole source code">
+		<javac destdir="${build.classes}" debug="${debug.flag}" deprecation="on">
+			<src path="${src.dir}" />
+			<exclude name="" />
+			<classpath>
+				<pathelement location="." />
+				<pathelement location="${lib.dir}/log4j/log4j-1.2.17.jar" />
+				<pathelement location="${lib.dir}/mysql-connector-java/mysql-connector-java-5.1.22-bin.jar" />
+				<pathelement location="${lib.dir}/servlet/javax.servlet.jar" />
+				<pathelement location="${lib.dir}/json/json.jar" />
+				<pathelement location="${lib.dir}/c3p0/c3p0-0.9.1.2.jar" />
+			</classpath>
+		</javac>
+	</target>
+
+	<target name="jar" depends="compile" description="Creates sdss.jar in the dist directory">
+		<jar jarfile="${build.lib}/sdss.jar" basedir="${build.classes}" />
+		<copy file="${build.lib}/sdss.jar" todir="${lib.dir}" />
+	</target>
+
+	<target name="sdss-war" depends="jar" description="Compiles and creates the deployable war for RemoteMap">
+		<copy todir="${build.lib}" flatten="true">
+			<filelist refid="dependent-jars" />
+		</copy>
+		<war destfile="${lib.dir}/${sdss.war.name}.war" webxml="conf/web.xml">
+			<lib dir="${build.lib}" />
+			<fileset dir="${build.jsp}" includes="*.jsp" />
+			<classes dir="${build.classes}" includes="com/**" />
+			<classes dir="conf" includes="*.properties" />
+		</war>
+	</target>
+
+	<target name="all" depends="clean,jar,sdss-war" description="Cleans, compiles and then builds the JAR file">
+	</target>
+</project>
