@@ -70,7 +70,7 @@
 		</copy>
 		<war destfile="${lib.dir}/${sdss.war.name}.war" webxml="conf/web.xml">
 			<lib dir="${build.lib}" />
-			<fileset dir="${build.jsp}" includes="*.jsp" />
+			<fileset dir="${build.jsp}" includes="*.*" />
 			<classes dir="${build.classes}" includes="com/**" />
 			<classes dir="conf" includes="*.properties" />
 		</war>
