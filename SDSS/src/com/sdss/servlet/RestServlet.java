@@ -97,7 +97,7 @@ public class RestServlet extends HttpServlet
 			{
 				try
 				{
-					responseString = XML.toString(returnObj);
+					responseString = "<myResponse>" + XML.toString(returnObj) + "</myResponse>";
 				}
 				catch (Exception e2)
 				{
