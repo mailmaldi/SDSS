@@ -33,6 +33,7 @@ public class CrossVerifier
 					splits = line.split(",");
 					String rightAsc = splits[3];
 					String decl = splits[4];
+					// dblRightAscension:[15%20TO%2030]%20AND%20dblDeclension:[20%20TO%20*]
 					String queryEnd = "dblRightAscension:\"" + rightAsc + "\" AND " + "dblDeclension:\"" + decl + "\"";
 
 					JSONObject jObj = new JSONObject();
@@ -42,8 +43,9 @@ public class CrossVerifier
 
 					JSONObject body = (JSONObject) jObj.get("body");
 					JSONObject response = new JSONObject(body.getString("response"));
-					// System.out.println(response.getInt("numFound"));
-					if (response.getInt("numFound") > 0)
+					// System.out.println(body.toString());
+					int numFound = response.getInt("numFound");
+					if (numFound > 0)
 					{
 						System.out.println("FOUND:" + " Key=" + line);
 					}

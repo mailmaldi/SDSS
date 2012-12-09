@@ -14,8 +14,8 @@ public class Soc668FileParser
 		BufferedWriter writer = null;
 		try
 		{
-			reader = new BufferedReader(new FileReader("C:\\VirtualBox\\value_listing.txt"));
-			writer = new BufferedWriter(new FileWriter("C:\\VirtualBox\\value_listing_out.txt"), 8 * 1024 * 1024);
+			reader = new BufferedReader(new FileReader("C:\\value_listing.txt"), 8 * 1024 * 1024);
+			writer = new BufferedWriter(new FileWriter("C:\\value_listing_out.txt"), 8 * 1024 * 1024);
 			String line = null;
 			int count = 0;
 			while ((line = reader.readLine()) != null)
@@ -23,10 +23,24 @@ public class Soc668FileParser
 				// count++;
 				// if (count > 10000)
 				// break;
-				String[] splits = line.split(" ");
+				String[] splits = line.split(",");
 				if (splits.length == 10)
 				{
-					writer.write(printSplits(splits));
+					// String newLine = printSplits(splits);
+					// writer.write(newLine); // write old line
+					// ramin = ra - error/3600; ramax = ra + error/3600; decmin = dec - error/3600; decmax = dec + error/3600;
+					// String[] newSplits = newLine.split(",");
+					double ra = Double.parseDouble(splits[1]);
+					double dec = Double.parseDouble(splits[2]);
+					double error = Double.parseDouble(splits[3]);
+
+					double ramin = ra - error / 3600;
+					double ramax = ra + error / 3600;
+					double decmin = dec - error / 3600;
+					double decmax = dec + error / 3600;
+					String writeLine = line + "," + ramin + "," + ramax + "," + decmin + "," + decmax;
+					writer.write(writeLine);
+
 					writer.newLine();
 					// System.out.println(printSplits(splits));
 
