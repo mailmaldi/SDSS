@@ -23,7 +23,7 @@ public class HttpCaller
 
 			HttpResponse response = httpclient.execute(httpGet);
 
-			System.out.println("CALLING URL: " + URL);
+			// System.out.println("CALLING URL: " + URL);
 
 			HttpEntity entity = response.getEntity();
 
@@ -34,14 +34,19 @@ public class HttpCaller
 			jObj.put("body", temp);
 			statusCode = response.getStatusLine().getStatusCode();
 
-			System.out.println("RESPONSE code:" + statusCode);
-			System.out.println("RESPONSE body:" + responseBody);
+			// System.out.println("RESPONSE code:" + statusCode);
+			// System.out.println("RESPONSE body:" + responseBody);
 		}
 		catch (Exception e)
 		{
 			e.printStackTrace();
 		}
 		return statusCode;
+	}
+
+	public static String buildSolrQuery()
+	{
+		return null;
 	}
 
 	// QUERY FOR OBJECTS IN IMAGE (sorted by decreasing brightness)

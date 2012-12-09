@@ -12,6 +12,12 @@ public class SDSSConstants
 
 	public static final String FORMAT = "format";
 
+	public static final String ASCENSION = "dblRightAscension";
+
+	public static final String DECLENSION = "dblDeclension";
+
+	public static final String MAGNITUDE = "fltMagnitude";
+
 	public static enum METHOD_TYPES
 	{
 		METHOD1, METHOD2, METHOD3
