@@ -1,7 +1,6 @@
 package com.sdss.servlet;
 
 import java.io.IOException;
-import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,9 +9,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
+import org.json.XML;
 
-import com.sdss.auth.AuthTableHandler;
+import com.sdss.common.Authenticate;
+import com.sdss.common.HttpCaller;
 import com.sdss.common.SDSSConstants;
+import com.sdss.common.SDSSConstants.METHOD_TYPES;
 import com.sdss.common.Utils;
 import com.sdss.exception.ActionException;
 
@@ -33,59 +35,84 @@ public class RestServlet extends HttpServlet
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		JSONObject returnObj = new JSONObject();
-		returnObj.optString("status", "error");
-		returnObj.optString("code", "100");
-		returnObj.optString("cause", "Unknown Error has occured");
+		JSONObject returnObj = ActionException.UNKNOWN_EXCEPTION.toJSONObject();
 
 		try
 		{
-			String userid = request.getParameter(SDSSConstants.USERID);
-			String password = request.getParameter(SDSSConstants.PASSWORD);
-			if (Utils.isEmpty(userid) || Utils.isEmpty(password))
+			Authenticate.authenticate(request); // will throw an ActionException if not authenticated
+
+			String method = request.getParameter(SDSSConstants.METHOD);
+			// TODO method names need to be put in a enum or something
+			if (Utils.isEmpty(method))
 			{
-				returnObj.put("code", "101");
-				returnObj.put("cause", "userid or password missing");
-				throw new ActionException();
+				throw ActionException.METHOD_FAIL;
 			}
 
-			HashMap<String, String> authMapParam = AuthTableHandler.getInstance().getTupleByUserid(userid.trim());
-			if (Utils.isEmpty(authMapParam))
+			METHOD_TYPES methodType = null;
+			try
 			{
-				returnObj.put("code", "102");
-				returnObj.put("cause", "userid not found in DB");
-				throw new ActionException();
+				methodType = SDSSConstants.METHOD_TYPES.valueOf(method);
+
+			}
+			catch (Exception e)
+			{
+				throw ActionException.METHOD_FAIL;
 			}
 
-			String generatedPasswordHash = Utils.generateDBPassword(password.trim());
-			if (!generatedPasswordHash.equals(authMapParam.get("password")))
+			returnObj = ActionException.SUCCESS.toJSONObject();
+
+			JSONObject temp = new JSONObject();
+			switch (methodType)
 			{
-				returnObj.put("code", "103");
-				returnObj.put("cause", "password doesnt match");
-				throw new ActionException();
+			case METHOD1:
+				HttpCaller.callSolr(HttpCaller.URL1, temp);
+				returnObj.put("body", temp.get("body"));
+				break;
+
+			case METHOD2:
+				HttpCaller.callSolr(HttpCaller.URL2, temp);
+				returnObj.put("body", temp.get("body"));
+				break;
+
+			case METHOD3:
+				break;
 			}
-
-			logger.info("userid:" + userid + " Authenticated");
-
-			returnObj.put("status", "success");
-			returnObj.put("code", "0");
-			returnObj.put("cause", "successfully authenticated");
-			returnObj.put("body", "");
 
 		}
 		catch (ActionException ae)
 		{
-
+			returnObj = ae.toJSONObject();
+			System.out.println("Caught ae in Rest:" + ae.toJSONObject().toString());
 		}
 		catch (Exception e)
 		{
 			e.printStackTrace();
+			returnObj = ActionException.UNKNOWN_EXCEPTION.toJSONObject();
 		}
 		finally
 		{
-			response.getWriter().write(returnObj.toString());
+			String responseString = returnObj.toString();
+			String format = request.getParameter(SDSSConstants.FORMAT);
+			if (!Utils.isEmpty(format) && format.trim().equalsIgnoreCase("xml"))
+			{
+				try
+				{
+					responseString = XML.toString(returnObj);
+				}
+				catch (Exception e2)
+				{
+				}
+			}
+
+			response.getWriter().write(responseString);
+			// String xml = XML.toString(returnObj);
 		}
 
+	}
+
+	public static boolean validateEmptyParam(HttpServletRequest request, String param)
+	{
+		return Utils.isEmpty(request.getParameter(param));
 	}
 
 	/**

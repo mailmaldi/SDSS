@@ -29,6 +29,11 @@
 		<file name="mysql-connector-java/mysql-connector-java-5.1.22-bin.jar" />
 		<file name="servlet/javax.servlet.jar" />
 		<file name="json/json.jar" />
+		<file name="commons-codec-1.7/commons-codec-1.7.jar" />
+		<file name="apache/commons-logging-1.1.1.jar" />
+		<file name="apache/httpclient-4.2.2.jar" />
+		<file name="apache/httpcore-4.2.3.jar" />
+		<file name="apache/httpmime-4.2.2.jar" />
 	</filelist>
 
 
@@ -55,6 +60,11 @@
 				<pathelement location="${lib.dir}/servlet/javax.servlet.jar" />
 				<pathelement location="${lib.dir}/json/json.jar" />
 				<pathelement location="${lib.dir}/c3p0/c3p0-0.9.1.2.jar" />
+				<pathelement location="${lib.dir}/commons-codec-1.7/commons-codec-1.7.jar" />
+				<pathelement location="${lib.dir}/apache/commons-logging-1.1.1.jar" />
+				<pathelement location="${lib.dir}/apache/httpclient-4.2.2.jar" />
+				<pathelement location="${lib.dir}/apache/httpcore-4.2.3.jar" />
+				<pathelement location="${lib.dir}/apache/httpmime-4.2.2.jar" />
 			</classpath>
 		</javac>
 	</target>

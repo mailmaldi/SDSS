@@ -4,9 +4,16 @@ import java.security.MessageDigest;
 
 import org.apache.log4j.Logger;
 
+import com.sdss.exception.ActionException;
+
 public class Utils
 {
 	private static final Logger logger = Logger.getLogger(Utils.class);
+
+	public static enum STATUS
+	{
+		SUCCESS, ERROR
+	};
 
 	public static final String salt = "zP9UFJOklQLePOqf0lSh0NgdlXWAt8qhIq4adcP1opdkz8UwVz";
 

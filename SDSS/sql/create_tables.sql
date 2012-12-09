@@ -7,3 +7,5 @@ salt VARCHAR(200),
 timestamp BIGINT,
 metadata VARCHAR(200) default "{}"
 ) ENGINE=InnoDb DEFAULT CHARSET=utf8 MAX_ROWS = 1000000000;
+
+--grant all privileges on *.* to 'test'@'%' identified by 'test';
