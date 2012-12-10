@@ -63,6 +63,62 @@ public class SDSSObjectsTH extends DBBase
 		super(prop);
 	}
 
+	public List<SDSSObjects> getObjectsForImage(String imageName)
+	{
+		List<SDSSObjects> resultList = new ArrayList<SDSSObjects>();
+		String query = "SELECT * FROM " + table_name + " WHERE imageName = ? ";
+
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		try
+		{
+			conn = getConnection();
+			stmt = conn.prepareStatement(query);
+			stmt.setString(1, imageName);
+			rs = stmt.executeQuery();
+
+			if (rs == null)
+			{
+				return resultList; // TODO comment this
+			}
+
+			while (rs.next())
+			{
+
+				SDSSObjects obj = new SDSSObjects();
+				obj.setBasePath(rs.getString(1));
+				obj.setImageName(rs.getString(2));
+				obj.setOjbId(rs.getInt(3));
+				obj.setRightAscension(rs.getDouble(4));
+				obj.setDeclension(rs.getDouble(5));
+				obj.setMajorAxis(rs.getDouble(6));
+				obj.setMinorAxis(rs.getDouble(7));
+				obj.setEccentricity(rs.getDouble(8));
+				obj.setTheta(rs.getDouble(9));
+				obj.setSolidAngle(rs.getInt(10));
+				obj.setCount(rs.getInt(11));
+				obj.setNumPixels(rs.getInt(12));
+				obj.setMagnitude(rs.getDouble(13));
+				obj.setConstellation(rs.getString(14));
+				resultList.add(obj);
+			}
+			return resultList;
+		}
+		catch (SQLException e)
+		{
+			logger.error("Failed to get SDSSObjects ", e);
+			e.printStackTrace();
+		}
+		finally
+		{
+			releaseConnection(conn);
+			closePreparedStatement(stmt);
+			closeResultSet(rs);
+		}
+		return resultList;
+	}
+
 	public List<SDSSObjects> getImages(double rightAscensionMin, double rightAscensionMax, double declensionMin, double declensionMax)
 	{
 		List<SDSSObjects> resultList = new ArrayList<SDSSObjects>();

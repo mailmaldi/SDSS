@@ -22,6 +22,8 @@ public class SDSSConstants
 
 	public static final String ROWS = "rows";
 
+	public static final String IMAGENAME = "imageName";
+
 	public static final String BLUEGRIT_SOLR_URL = "http://bluegrit.cs.umbc.edu:8080/solr/search?wt=json&";
 
 	public static final String FRAHA_URL = "http://bluegrit.cs.umbc.edu/~fraha1/share";
@@ -30,7 +32,7 @@ public class SDSSConstants
 
 	public static enum METHOD_TYPES
 	{
-		METHOD1, METHOD2, METHOD3, METHOD4
+		METHOD1, METHOD2, METHOD3, METHOD4, METHOD5
 	};
 
 	public static String getFrahaURL(String imagePath)

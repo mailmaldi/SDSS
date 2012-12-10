@@ -82,6 +82,11 @@ public class RestServlet extends HttpServlet
 				Method4.service(request, temp);
 				returnObj.put("body", temp.get("body"));
 				break;
+
+			case METHOD5:
+				Method5.service(request, temp);
+				returnObj.put("body", temp.get("body"));
+				break;
 			}
 
 		}
