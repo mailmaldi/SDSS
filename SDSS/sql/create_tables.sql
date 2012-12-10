@@ -11,6 +11,7 @@ metadata VARCHAR(200) default "{}"
 INSERT INTO SDSSAuth (emailid,userid,password) values ('milindp1@umbc.edu','milindp1','KMWpb7m9JuSsesw0+Tlin5P/HKM=');
 
 --grant all privileges on *.* to 'test'@'%' identified by 'test';
+--grant all privileges on *.* to 'test'@'localhost' identified by 'test';
 
 CREATE TABLE `sdss_run125_objects` (  
 `basePath` varchar(100) DEFAULT NULL,  
