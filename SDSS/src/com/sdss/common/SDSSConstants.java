@@ -18,6 +18,12 @@ public class SDSSConstants
 
 	public static final String MAGNITUDE = "fltMagnitude";
 
+	public static final String START = "start";
+
+	public static final String ROWS = "rows";
+
+	public static final String BLUEGRIT_SOLR_URL = "http://bluegrit.cs.umbc.edu:8080/solr/search?wt=json&";
+
 	public static enum METHOD_TYPES
 	{
 		METHOD1, METHOD2, METHOD3

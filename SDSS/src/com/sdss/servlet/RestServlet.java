@@ -65,12 +65,12 @@ public class RestServlet extends HttpServlet
 			switch (methodType)
 			{
 			case METHOD1:
-				HttpCaller.callSolr(HttpCaller.URL1, temp);
+				Method1.service(request, temp);
 				returnObj.put("body", temp.get("body"));
 				break;
 
 			case METHOD2:
-				HttpCaller.callSolr(HttpCaller.URL2, temp);
+				Method2.service(request, temp);
 				returnObj.put("body", temp.get("body"));
 				break;
 
@@ -108,11 +108,6 @@ public class RestServlet extends HttpServlet
 			// String xml = XML.toString(returnObj);
 		}
 
-	}
-
-	public static boolean validateEmptyParam(HttpServletRequest request, String param)
-	{
-		return Utils.isEmpty(request.getParameter(param));
 	}
 
 	/**

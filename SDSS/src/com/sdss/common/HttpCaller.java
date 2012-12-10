@@ -23,7 +23,7 @@ public class HttpCaller
 
 			HttpResponse response = httpclient.execute(httpGet);
 
-			// System.out.println("CALLING URL: " + URL);
+			System.out.println("CALLING URL: " + URL);
 
 			HttpEntity entity = response.getEntity();
 
@@ -34,7 +34,7 @@ public class HttpCaller
 			jObj.put("body", temp);
 			statusCode = response.getStatusLine().getStatusCode();
 
-			// System.out.println("RESPONSE code:" + statusCode);
+			System.out.println("RESPONSE code:" + statusCode);
 			// System.out.println("RESPONSE body:" + responseBody);
 		}
 		catch (Exception e)
@@ -48,12 +48,6 @@ public class HttpCaller
 	{
 		return null;
 	}
-
-	// QUERY FOR OBJECTS IN IMAGE (sorted by decreasing brightness)
-	public static String URL1 = "http://bluegrit.cs.umbc.edu:8080/solr/search?q=dblRightAscension:[15%20TO%2030]%20AND%20dblDeclension:[20%20TO%20*]&fq=fltMagnitude:[*%20TO%205]&sort=fltMagnitude%20asc&start=0&rows=100&wt=json&indent=true";
-
-	// QUERY FOR OBJECTS NOT IN IMAGE (sorted by decreasing brightness)
-	public static String URL2 = "http://bluegrit.cs.umbc.edu:8080/solr/search?q=dblRightAscension:[15%20TO%2030]%20AND%20dblDeclension:[20%20TO%20*]&fq=fltMagnitude:[5%20TO%20*]&sort=fltMagnitude%20asc&start=0&rows=100&wt=json&indent=true";
 
 	public static void main(String[] args)
 	{

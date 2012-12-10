@@ -107,4 +107,6 @@ public class ActionException extends Exception
 
 	public static ActionException METHOD_FAIL = new ActionException(102, Utils.STATUS.ERROR.toString(), "method missing or wrong value");
 
+	public static ActionException PARAMETER_MISSING = new ActionException(103, Utils.STATUS.ERROR.toString(), "missing parameter or empty, please check");
+
 }

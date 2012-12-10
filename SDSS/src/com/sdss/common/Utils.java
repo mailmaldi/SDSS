@@ -2,6 +2,8 @@ package com.sdss.common;
 
 import java.security.MessageDigest;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.log4j.Logger;
 
 import com.sdss.exception.ActionException;
@@ -97,4 +99,5 @@ public class Utils
 		}
 		return stringBuffer.toString();
 	}
+
 }
