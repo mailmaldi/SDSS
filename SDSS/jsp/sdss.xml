@@ -5,12 +5,18 @@
         <resource path="/rest">
                 <method id="service" name="GET">
                     <request>
-                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="userid" style="query" type="xs:string"/>
-                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="password" style="query" type="xs:string"/>
-                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="format" style="query" type="xs:string"/>
-                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="method" style="query" type="xs:string"/>
-                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="start" style="query" type="xs:int"/>
-                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="rows" style="query" type="xs:int"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="userid" style="query" type="xs:string" required="true"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="password" style="query" type="xs:string" required="true"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="format" style="query" type="xs:string" required="false" 																						default="json"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="method" style="query" type="xs:string" required="true"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="start" style="query" type="xs:int" required="false" default="0"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="rows" style="query" type="xs:int" required="false" default="100"/>
+						<param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="dblRightAscensionMin" style="query" type="xs:string" required="true"/>
+						<param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="dblRightAscensionMax" style="query" type="xs:string" required="true"/>
+						<param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="dblDeclensionMin" style="query" type="xs:string" required="true"/>
+						<param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="dblDeclensionMax" style="query" type="xs:string" required="true"/>
+						<param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="fltMagnitudeMin" style="query" type="xs:string" required="false"/>
+						<param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="fltMagnitudeMax" style="query" type="xs:string" required="false"/>
                     </request>
                     <response>
                         <representation mediaType="application/xml"/>
