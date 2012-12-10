@@ -6,7 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import org.apache.log4j.Logger;
@@ -119,6 +121,30 @@ public class SDSSObjectsTH extends DBBase
 		}
 
 		return resultList;
+	}
+
+	public List<SDSSObjects> getUniqueImages(double ascMin, double ascMax, double declMin, double declMax)
+	{
+		List<SDSSObjects> returnList = new ArrayList<SDSSObjects>();
+		Map<String, SDSSObjects> returnMap = new HashMap<String, SDSSObjects>();
+		try
+		{
+			List<SDSSObjects> resultList = getImages(ascMin, ascMax, declMin, declMax);
+			for (SDSSObjects sdssObjects : resultList)
+			{
+				returnMap.put(sdssObjects.getImageName(), sdssObjects);
+			}
+			for (String imageName : returnMap.keySet())
+			{
+				returnList.add(returnMap.get(imageName));
+			}
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+
+		return returnList;
 	}
 
 	/**

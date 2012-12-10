@@ -97,6 +97,32 @@ public class SDSSObjects
 		return jObj;
 	}
 
+	public JSONObject toJSONObjectObjectParams() throws JSONException
+	{
+		JSONObject jObj = new JSONObject();
+		jObj.put("ojbId", ojbId);
+		jObj.put("rightAscension", rightAscension);
+		jObj.put("declension", declension);
+		jObj.put("majorAxis", majorAxis);
+		jObj.put("minorAxis", minorAxis);
+		jObj.put("eccentricity", eccentricity);
+		jObj.put("theta", theta);
+		jObj.put("solidAngle", solidAngle);
+		jObj.put("count", count);
+		jObj.put("numPixels", numPixels);
+		jObj.put("magnitude", magnitude);
+		jObj.put("constellation", constellation);
+		return jObj;
+	}
+
+	public JSONObject toJSONObjectImageParams() throws JSONException
+	{
+		JSONObject jObj = new JSONObject();
+		jObj.put("imageName", imageName);
+		jObj.put("constellation", constellation);
+		return jObj;
+	}
+
 	/**
 	 * 
 	 * getters & setters

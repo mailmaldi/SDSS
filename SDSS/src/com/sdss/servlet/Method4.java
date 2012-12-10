@@ -12,7 +12,7 @@ import com.sdss.common.SDSSConstants;
 import com.sdss.common.Utils;
 import com.sdss.exception.ActionException;
 
-public class Method2
+public class Method4
 {
 
 	// rightAscension min,max & declension min,max
@@ -43,7 +43,7 @@ public class Method2
 			throw ActionException.PARAMETER_MISSING;
 		}
 
-		List<SDSSObjects> resultList = SDSSObjectsTH.getInstance().getImages(ascMin, ascMax, declMin, declMax);
+		List<SDSSObjects> resultList = SDSSObjectsTH.getInstance().getUniqueImages(ascMin, ascMax, declMin, declMax);
 		System.out.println("ResultSet size = " + resultList.size());
 
 		JSONObject myLocal = new JSONObject();
@@ -51,8 +51,8 @@ public class Method2
 		int i = 0;
 		for (SDSSObjects sdssObjects : resultList)
 		{
-			JSONObject here = sdssObjects.toJSONObjectObjectParams();
-			//here.put("imageURL", SDSSConstants.getFrahaURL(here.getString("imageName")));
+			JSONObject here = sdssObjects.toJSONObjectImageParams();
+			here.put("imageURL", SDSSConstants.getFrahaURL(here.getString("imageName")));
 			myLocal.put("value" + i++, here);
 		}
 

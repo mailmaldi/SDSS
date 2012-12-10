@@ -30,7 +30,7 @@ public class SDSSConstants
 
 	public static enum METHOD_TYPES
 	{
-		METHOD1, METHOD2, METHOD3
+		METHOD1, METHOD2, METHOD3, METHOD4
 	};
 
 	public static String getFrahaURL(String imagePath)
