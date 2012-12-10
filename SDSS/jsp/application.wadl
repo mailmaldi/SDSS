@@ -18,6 +18,7 @@
 						<param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="fltMagnitudeMin" style="query" type="xs:double" required="false"/>
 						<param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="fltMagnitudeMax" style="query" type="xs:double" required="false"/>
 						<param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="version" style="query" type="xs:string" default="1.0" required="false"/>
+						<param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="imageName" style="query" type="xs:string" required="true"/>
                     </request>
                     <response>
                         <representation mediaType="application/xml"/>
