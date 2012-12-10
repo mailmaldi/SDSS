@@ -12,7 +12,6 @@ import org.json.JSONObject;
 import org.json.XML;
 
 import com.sdss.common.Authenticate;
-import com.sdss.common.HttpCaller;
 import com.sdss.common.SDSSConstants;
 import com.sdss.common.SDSSConstants.METHOD_TYPES;
 import com.sdss.common.Utils;
@@ -75,6 +74,8 @@ public class RestServlet extends HttpServlet
 				break;
 
 			case METHOD3:
+				Method3.service(request, temp);
+				returnObj.put("body", temp.get("body"));
 				break;
 			}
 

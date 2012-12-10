@@ -110,13 +110,14 @@ public class AuthTableHandler extends DBBase
 	 */
 	public static void main(String[] args) throws Exception
 	{
-		HashMap<String, String> myMap = AuthTableHandler.getInstance().getTupleByUserid("milind");
+		HashMap<String, String> myMap = AuthTableHandler.getInstance().getTupleByUserid("milindp1");
 		if (myMap == null)
 			System.out.println("NULL response");
-		for (String string : myMap.keySet())
-		{
-			System.out.println("key = " + string + " , value = " + myMap.get(string));
-		}
+		else
+			for (String string : myMap.keySet())
+			{
+				System.out.println("key = " + string + " , value = " + myMap.get(string));
+			}
 
 	}
 

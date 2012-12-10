@@ -24,17 +24,26 @@ public class SDSSConstants
 
 	public static final String BLUEGRIT_SOLR_URL = "http://bluegrit.cs.umbc.edu:8080/solr/search?wt=json&";
 
+	public static final String FRAHA_URL = "http://bluegrit.cs.umbc.edu/~fraha1/share";
+
+	public static final String EXTENSION = ".mask.png";
+
 	public static enum METHOD_TYPES
 	{
 		METHOD1, METHOD2, METHOD3
 	};
+
+	public static String getFrahaURL(String imagePath)
+	{
+		return FRAHA_URL + imagePath + EXTENSION;
+	}
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args)
 	{
-
+		String givenPath = "/sdss/data/000745/40/1/fpC-000745-g1-0011";
+		System.out.println(getFrahaURL(givenPath));
 	}
-
 }
